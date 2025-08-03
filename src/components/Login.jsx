@@ -7,6 +7,7 @@ import {BASE_URL} from '../utils/constants';
 function Login() {
   const [emailId , setEmailId] = useState('feed-API@gmail.com');
   const [password , setPassword] = useState('Email!123');
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,11 +18,13 @@ function Login() {
         emailId: emailId,
         password: password
       },{withCredentials: true});
-
+      console.log(res.data);
       dispatch(addUser(res.data));
       return navigate("/feed");
     } catch (error) {
-      console.log(error);
+      setError(error?.response?.data?.message || "something went wrong");
+      console.log(error?.response?.data?.message);
+      // console.log(error?.response?.data);
     }
    
   }
@@ -50,6 +53,7 @@ function Login() {
             </div>
            
           </div>
+          {error && <p className='text-red-500 text-center'>{error}</p>}
           <div className='flex justify-center'>
                 <button className="btn btn-primary" onClick={handleLoginClick}>Login</button>
             </div>
