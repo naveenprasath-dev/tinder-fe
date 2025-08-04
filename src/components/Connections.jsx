@@ -39,7 +39,7 @@ if (connections.length ===0) {
         return (
             <div key={connection._id} className="flex  m-4 p-4  rounded-lg bg-base-300 mx-auto w-1/2 "> 
                 <div>
-                    <img src={photoUrl} alt=""  className="w-20 h-20 rounded-b-full"/>
+                    <img src={photoUrl} alt=""  className="w-20 h-20 rounded-b-full object-cover"/>
                 </div>
                 <div className="mx-4 text-left">
                     <h2 className="font-bold text-2xl"> {firstName + " " + lastName }</h2>
