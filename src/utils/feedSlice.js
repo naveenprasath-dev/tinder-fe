@@ -12,14 +12,20 @@ export const feedSlice = createSlice({
         // immutable state based off those changes
         return action.payload;
       },
-      removeFeed: () => {
-        return null
+      removeUserFromFeed: (state, action) => {
+        const newFeed = state.filter((user) => {
+          if (user._id !== action.payload)  {
+            return user;
+          }
+        });
+       
+        return newFeed;
       }
     },
   })
 
 
   // Action creators are generated for each case reducer function
-export const { addFeed, removeUser } = feedSlice.actions
+export const { addFeed, removeUserFromFeed } = feedSlice.actions
 
 export default feedSlice.reducer

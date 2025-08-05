@@ -23,6 +23,10 @@ function Feed() {
     getFeed();
   }, []);
 
+    if (feed && feed.length ===0) {
+      return <div>Feed is empty</div>
+    }
+    
   return (feed &&  (
     <div className='flex justify-center my-10'>
       <UserCard user={feed[0]}/>
