@@ -65,3 +65,8 @@ Body
     - Signup on razorpay and complete KYC
     - Created a UI for premium page.
     - Creating an API for create order in backend.
+
+# Real time Chat APP (Socket.io)
+    - Build the ui for chat window on /chat/:targetUserId
+    - setup socket.io in backend.
+    - npm i socket.io.
