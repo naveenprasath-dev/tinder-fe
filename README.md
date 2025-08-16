@@ -60,3 +60,8 @@ Body
     - restart nginx: sudo systemctl restart nginx
 
 - Modify the base url in front end project.
+
+# Razorpay Payment Gateway Integration.
+    - Signup on razorpay and complete KYC
+    - Created a UI for premium page.
+    - Creating an API for create order in backend.
