@@ -1,8 +1,17 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { BASE_URL } from '../utils/constants'
 
 function Premium() {
+
+    const [isUserPremium , setIsUserPremium]= useState(false);
+
+    const verifyPremiumUser = async () => {
+        const res = await axios.get(BASE_URL+ "/premium/verify", {withCredentials: true});
+        if (res.data.isPremium) {
+            setIsUserPremium(true);
+        }
+    }
     const handleBuyClick = async (type) => {
         const order = await axios.post(BASE_URL+ "/payment/create", {
             membershipType : type,
@@ -28,48 +37,50 @@ function Premium() {
         theme: {
           color: '#F37254'
         },
+        handler: verifyPremiumUser(),
       };
         const rzp = new window.Razorpay(options);
         rzp.open();
         // it should open the razorpay dialog box.
     }
-  return (
-    <div className='m-10'>
-        <div className="flex w-full">
-        <div className="card bg-base-300 rounded-box grid  h-80  grow place-items-center">
-            <h1 className='font-bold text-3xl'>
-                Silver Membership
-            </h1>
-            <ul>
-                Chat with other perople.
-            </ul>
-            <ul>
-                100 connection requests per day
-            </ul>
-            <ul>
-                200 calls requests per day
-            </ul>
-            <button className='btn btn-secondary' onClick={() => handleBuyClick("silver")}> Buy Silver membership</button>
-        </div>
-        <div className="divider divider-horizontal">OR</div>
-        <div className="card bg-base-300 rounded-box grid h-80 grow place-items-center">
-            <h1 className='font-bold text-3xl'>
-                Gold Membership
-            </h1>
-            <ul>
-                Chat with other perople.
-            </ul>
-            <ul>
-                Unlimited connection requests per day
-            </ul>
-            <ul>
-                Unlimited calls requests per day
-            </ul>
-            <button className='btn btn-primary' onClick={() => handleBuyClick("gold")}> Buy Gold membership</button>
-        </div>
-</div>
+    return isUserPremium ? "you are a premium User" : (
+        <div className='m-10'>
+            <div className="flex w-full">
+            <div className="card bg-base-300 rounded-box grid  h-80  grow place-items-center">
+                <h1 className='font-bold text-3xl'>
+                    Silver Membership
+                </h1>
+                <ul>
+                    Chat with other perople.
+                </ul>
+                <ul>
+                    100 connection requests per day
+                </ul>
+                <ul>
+                    200 calls requests per day
+                </ul>
+                <button className='btn btn-secondary' onClick={() => handleBuyClick("silver")}> Buy Silver membership</button>
+            </div>
+            <div className="divider divider-horizontal">OR</div>
+            <div className="card bg-base-300 rounded-box grid h-80 grow place-items-center">
+                <h1 className='font-bold text-3xl'>
+                    Gold Membership
+                </h1>
+                <ul>
+                    Chat with other perople.
+                </ul>
+                <ul>
+                    Unlimited connection requests per day
+                </ul>
+                <ul>
+                    Unlimited calls requests per day
+                </ul>
+                <button className='btn btn-primary' onClick={() => handleBuyClick("gold")}> Buy Gold membership</button>
+            </div>
     </div>
-  )
+        </div>
+      )
+
 }
 
 export default Premium
